@@ -11,3 +11,7 @@
 To replace a concept visual with an approved real capture, save the new asset under `showcase/` and update the relevant image source, alternative text, enlarge-dialog title, and caption in `docs/index.html`. Review the media for player names, chat, server details, sensitive content, or unreleased features. Retain an explicit distinction between an actual capture, a prototype, and a design illustration. Update the README showcase image and its caption if appropriate. Any approved video can use the same `data-motion` button and local media path. No external video hosting or trackers are required.
 
 Release updates are read from the public repository only. Site content, compatibility details, and the packaged snapshot should be updated when the suite changes significantly. Keep the Microsoft Store product ID and installer identity unchanged unless Microsoft assigns a new one.
+
+## v1.1 branding refresh
+
+`brand/*.png` includes the ten actual addon icons exported from the newer P39-B design baseline (original 64×64 pixels; alpha retained). The settings banners are WebP presentation exports of the three original 2048×512 settings textures. `brand/social.png` temporarily reuses the existing official MirageUI website banner until the approved 1280×640 share design is uploaded. Existing feature studies remain illustrative until approved gameplay captures are available. The published P18 release is not claimed to contain the newer artwork or capabilities.

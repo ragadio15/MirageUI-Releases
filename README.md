@@ -13,6 +13,10 @@
 
 ---
 
+## Public release status
+
+**Test channel:** [v1.0.13-rc.1](https://github.com/ragadio15/MirageUI-Releases/releases/tag/v1.0.13-rc.1) was the only published Suite release at the November 24, 2026 snapshot. Native verification was **not run** per its release notes. For current availability and release-specific metadata, use the [live release center](https://ragadio15.github.io/MirageUI-Releases/#releases) or [GitHub Releases](https://github.com/ragadio15/MirageUI-Releases/releases).
+
 ## Installation
 
 1. **Get the installer.** Open the [MirageUI Installer on the Microsoft Store](https://apps.microsoft.com/detail/9P9K6ZRQHZJR) and install it on Windows.
@@ -33,6 +37,16 @@ The Store listing distributes the installer; the MirageUI Suite itself is distri
 <div align="center">
   <a href="https://ragadio15.github.io/MirageUI-Releases/#experience"><img src="assets/MirageUI_Showcase.webp" width="840" alt="MirageUI original interface concept illustration, not an in-game screenshot" /></a>
   <p><sub>Original feature illustration · not an in-game capture</sub></p>
+</div>
+
+<div align="center">
+  <img src="docs/assets/brand/mirageui.png" width="48" alt="MirageUI" /> &nbsp;
+  <img src="docs/assets/brand/cursor-companion.png" width="48" alt="Cursor Companion" /> &nbsp;
+  <img src="docs/assets/brand/sanctuary.png" width="48" alt="Sanctuary" /> &nbsp;
+  <img src="docs/assets/brand/wealthcraft.png" width="48" alt="WealthCraft" /> &nbsp;
+  <img src="docs/assets/brand/utility-core.png" width="48" alt="MirageIntel" /> &nbsp;
+  <img src="docs/assets/brand/mirageui-options.png" width="48" alt="Options" />
+  <p><sub>Official addon branding from the newer design baseline; not a release announcement.</sub></p>
 </div>
 
 **Interface** — MirageUI and MirageUI Options.  
