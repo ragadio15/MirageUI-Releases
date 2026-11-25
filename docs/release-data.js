@@ -3,25 +3,25 @@ window.MirageReleaseData = {
   "checked": "2026-11-25",
   "snapshot": {
     "stable": {
-      "tag_name": "v1.0.43",
-      "name": "MirageUI Suite v1.0.43 (P40.6 Stable)",
+      "tag_name": "v1.0.46",
+      "name": "MirageUI Suite v1.0.46 (Stable)",
       "prerelease": false,
       "draft": false,
-      "published_at": "2026-11-25T05:52:08Z",
-      "html_url": "https://github.com/ragadio15/MirageUI-Releases/releases/tag/v1.0.43",
-      "body": "# MirageUI Suite v1.0.43 · P40.6 Stable\n\nP40.6 is the stable MirageUI Suite for World of Warcraft: Forever. The archive is the exact build approved after playtesting on client 1.60.1, build 71091, interface 16001. The in-game core version reads `1.0.43-rc.12`.\n\n## What changed\n\n- Friendly players use Blizzard’s overhead name and guild text. MirageUI no longer runs a distance check for each nearby friendly unit. Friendly targets can show a full nameplate when the client supplies one, and attackable units keep their own nameplate distance settings.\n- WealthCraft can resume background scans after eight seconds while preserving the current Shop results and Sell inputs. Item details stay visible between selections.\n- This build includes the revised settings banners and Help panel, Cursor Companion’s smoother ring rotation, and Insight’s restored tooltip behavior.\n\n## Installation\n\nFully exit WoW. Download `MirageUI_Suite_P40_6_Forever.zip` and select **Choose ZIP** in MirageUI Installer, or extract the ten included addon folders into the Forever client’s `Interface/AddOns` directory. Keep your existing `WTF` folder and SavedVariables.\n\n## Verification and known limitation\n\nThe packaged ZIP passed the archive, load-order and Lua checks, including compilation of 437 Lua files and a simulated crowd of 80 friendly units. Formal native verification recorded in the package is `NOT_RUN`. Forever build 71091 does not expose a supported control for an exact 50-yard cutoff on native overhead names. Some names may remain visible farther away.\n\n`SHA-256  9fc01368f74b7c13b2a34f4fcba71fe7bdd8026de2e0bd9a265587dfc96d468c`\n",
+      "published_at": "2026-11-25T18:29:40Z",
+      "html_url": "https://github.com/ragadio15/MirageUI-Releases/releases/tag/v1.0.46",
+      "body": "# MirageUI Suite v1.0.46 Stable\n\nFor World of Warcraft: Forever 1.60.1, build 71091, interface 16001.\n\n## Changes since v1.0.43\n\n- MirageUI Maps reveals unexplored terrain with distinct shading for travel planning. Custom city and point-of-interest icons are restored on supported zone and continent maps.\n- Customize UI includes options for opening the quest tracker and meters minimized.\n- New profiles and default resets use the reconciled MirageUI layouts and display settings. Cursor Companion uses the curated ring and menu defaults. The defaults are class-neutral and exclude personal spells, abilities, and macros. Existing saved profiles retain their preferences during an ordinary update.\n- Selecting a friendly player or NPC now requests the nameplate immediately and displays the selected card at full opacity as soon as the client supplies it. A next-frame retry handles the case where the plate arrives just after the click.\n\n## Installation\n\nFully exit WoW. Download `MirageUI_Suite_v1.0.46_Forever.zip` and use **Choose ZIP** in MirageUI Installer, or extract the ten addon folders into the Forever client's `Interface/AddOns` folder. Keep your existing `WTF` folder and SavedVariables.\n\n## Verification\n\nArchive integrity, addon load paths, Lua compilation, default profile behavior, and simulated nameplate selection were checked before publication. Formal native verification on build 71091 remains pending.\n\nSHA-256 for the Suite ZIP: `2405cfdd9922afcad0ddeb37dbbf89f94091ced5ac5e283264a4aa201de07a33`.\n",
       "assets": [
         {
-          "name": "MirageUI_Suite_P40_6_Forever.zip",
-          "browser_download_url": "https://github.com/ragadio15/MirageUI-Releases/releases/download/v1.0.43/MirageUI_Suite_P40_6_Forever.zip",
-          "size": 39166900,
-          "digest": "sha256:9fc01368f74b7c13b2a34f4fcba71fe7bdd8026de2e0bd9a265587dfc96d468c"
+          "name": "MirageUI_Suite_v1.0.46_Forever.zip",
+          "browser_download_url": "https://github.com/ragadio15/MirageUI-Releases/releases/download/v1.0.46/MirageUI_Suite_v1.0.46_Forever.zip",
+          "size": 39180733,
+          "digest": "sha256:2405cfdd9922afcad0ddeb37dbbf89f94091ced5ac5e283264a4aa201de07a33"
         },
         {
           "name": "SHA256SUMS.txt",
-          "browser_download_url": "https://github.com/ragadio15/MirageUI-Releases/releases/download/v1.0.43/SHA256SUMS.txt",
-          "size": 99,
-          "digest": "sha256:401205ef45eef5c822b6eab6f0123c7396bbe3e1d43644c2fd1a577595543836"
+          "browser_download_url": "https://github.com/ragadio15/MirageUI-Releases/releases/download/v1.0.46/SHA256SUMS.txt",
+          "size": 101,
+          "digest": "sha256:43226d2739b115a88159d4183d236ec9fdad3748f548b8d7613ca546e52f7158"
         }
       ]
     },
@@ -69,6 +69,13 @@ window.MirageReleaseData = {
       "native": "NOT_RUN",
       "installer": "MirageUI Installer · Choose ZIP",
       "notice": "P40.6 is approved for stable use. The installed core reports 1.0.43-rc.12."
+    },
+    "v1.0.46": {
+      "client": "Forever 1.60.1 (build 71091)",
+      "interface": "16001",
+      "native": "NOT_RUN",
+      "installer": "MirageUI Installer · Choose ZIP",
+      "notice": "This Stable release includes the revised Maps overlays, class-neutral defaults, and faster friendly target nameplate selection."
     }
   }
 };
