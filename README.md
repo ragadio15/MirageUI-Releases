@@ -17,7 +17,7 @@
 
 **Stable · P40.6 (v1.0.43).** Approved for World of Warcraft: Forever 1.60.1, build 71091, interface 16001. The installed core identifies itself as `1.0.43-rc.12`.
 
-[Download the stable Suite ZIP](https://github.com/ragadio15/MirageUI-Releases/raw/refs/heads/main/releases/v1.0.43/MirageUI_Suite_P40_6_Forever.zip) · [Release notes](releases/v1.0.43/README.md) · [SHA-256 checksum](releases/v1.0.43/SHA256SUMS.txt)
+[Download the stable Suite ZIP](https://github.com/ragadio15/MirageUI-Releases/releases/download/v1.0.43/MirageUI_Suite_P40_6_Forever.zip) · [Release notes](releases/v1.0.43/README.md) · [SHA-256 checksum](releases/v1.0.43/SHA256SUMS.txt)
 
 ## Installation
 
