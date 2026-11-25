@@ -19,6 +19,8 @@
 
 [Download the Stable Suite ZIP](https://github.com/ragadio15/MirageUI-Releases/releases/download/v1.0.46/MirageUI_Suite_v1.0.46_Forever.zip) · [Release notes](releases/v1.0.46/README.md) · [SHA-256 checksum](releases/v1.0.46/SHA256SUMS.txt)
 
+**Test build · v1.0.49** for Forever build 71139. [Download the test ZIP](https://github.com/ragadio15/MirageUI-Releases/raw/refs/heads/main/releases/v1.0.49/MirageUI_Suite_v1.0.49_Forever.zip) · [Changes and installation](releases/v1.0.49/README.md)
+
 ## Installation
 
 1. **Get the installer.** Open the [MirageUI Installer on the Microsoft Store](https://apps.microsoft.com/detail/9P9K6ZRQHZJR) and install it on Windows.
