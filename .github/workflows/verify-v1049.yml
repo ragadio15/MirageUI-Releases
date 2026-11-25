@@ -1,0 +1,40 @@
+name: Verify v1.0.49 distribution
+on:
+  push:
+    branches: [release-input/v1.0.49]
+    paths:
+      - .github/workflows/verify-v1049.yml
+      - release-inputs/v1.0.49.zst
+permissions:
+  contents: write
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Restore and verify the exact distribution archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          git init --quiet inputs
+          git -C inputs remote add origin "https://github.com/$GITHUB_REPOSITORY.git"
+          git -C inputs fetch --quiet --depth=1 origin "$GITHUB_SHA"
+          git -C inputs checkout --quiet --detach FETCH_HEAD
+          prior=inputs/releases/v1.0.46/MirageUI_Suite_v1.0.46_Forever.zip
+          printf '%s  %s\n' 2405cfdd9922afcad0ddeb37dbbf89f94091ced5ac5e283264a4aa201de07a33 "$prior" | sha256sum --check
+          zstd -qdc --long=27 --patch-from="$prior" inputs/release-inputs/v1.0.49.zst > suite.zip
+          printf '%s  suite.zip\n' 954988cbc0c89e30a6ceeb40347918851710843b84018efa772263902ab7132f | sha256sum --check
+          unzip -tqq suite.zip
+
+      - name: Stage the verified archive for the distribution pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY' | gh api --method POST "repos/$GITHUB_REPOSITORY/git/blobs" --input - --jq '.sha' > archive-id
+          import base64, json
+          with open("suite.zip", "rb") as archive:
+              print(json.dumps({"encoding": "base64", "content": base64.b64encode(archive.read()).decode("ascii")}))
+          PY
+          test "$(cat archive-id)" = "$(git hash-object suite.zip)"
