@@ -1,0 +1,77 @@
+name: Publish P40.6 stable
+on:
+  push:
+    branches: [release-input/p40.6]
+    paths:
+      - .github/workflows/publish-p406.yml
+      - release-p406-target.txt
+
+permissions:
+  contents: write
+
+concurrency: publish-p406-stable
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      PACKAGE: MirageUI_Suite_P40_6_Forever.zip
+      DIGEST: 9fc01368f74b7c13b2a34f4fcba71fe7bdd8026de2e0bd9a265587dfc96d468c
+      TAG: v1.0.43
+    steps:
+      - name: Reassemble the tested distribution and verify its bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git init --quiet inputs
+          git -C inputs remote add origin "https://github.com/$GH_REPO.git"
+          git -C inputs fetch --quiet --depth=1 origin "$GITHUB_SHA"
+          git -C inputs checkout --quiet --detach FETCH_HEAD
+          cat inputs/package-parts/P40.6/part-{1,2,3,4,5} > "$PACKAGE"
+          printf '%s  %s\n' "$DIGEST" "$PACKAGE" > SHA256SUMS.txt
+          sha256sum --check SHA256SUMS.txt
+          unzip -tqq "$PACKAGE"
+
+      - name: Make the complete archive available for the main-branch merge
+        if: ${{ hashFiles('inputs/release-p406-target.txt') == '' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY' | gh api --method POST "repos/$GH_REPO/git/blobs" --input - --jq '.sha' > receipt
+          import base64, json, os
+          with open(os.environ['PACKAGE'], 'rb') as archive:
+              print(json.dumps({'encoding': 'base64', 'content': base64.b64encode(archive.read()).decode('ascii')}))
+          PY
+          test "$(cat receipt)" = "$(git hash-object "$PACKAGE")"
+
+      - name: Publish the approved main commit and verify the release
+        if: ${{ hashFiles('inputs/release-p406-target.txt') != '' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          target=$(cat inputs/release-p406-target.txt)
+          [[ "$target" =~ ^[0-9a-f]{40}$ ]]
+          git -C inputs fetch --quiet origin main
+          git -C inputs merge-base --is-ancestor "$target" FETCH_HEAD
+          base="releases/$TAG"
+          test "$(git -C inputs rev-parse "$target:$base/$PACKAGE")" = "$(git hash-object "$PACKAGE")"
+          git -C inputs show "$target:$base/README.md" > notes.md
+          git -C inputs show "$target:$base/SHA256SUMS.txt" | cmp - SHA256SUMS.txt
+          if gh release view "$TAG" --json isDraft >/dev/null 2>&1; then
+            test "$(gh release view "$TAG" --json targetCommitish --jq .targetCommitish)" = "$target"
+          else
+            gh release create "$TAG" --draft --target "$target" --title 'MirageUI Suite v1.0.43 (P40.6 Stable)' --notes-file notes.md
+          fi
+          if [[ "$(gh release view "$TAG" --json isDraft --jq .isDraft)" = true ]]; then
+            gh release upload "$TAG" "$PACKAGE" SHA256SUMS.txt --clobber
+            mkdir -p verify
+            gh release download "$TAG" --dir verify --pattern "$PACKAGE" --pattern SHA256SUMS.txt
+            (cd verify && sha256sum --check SHA256SUMS.txt)
+            cmp "$PACKAGE" "verify/$PACKAGE"
+            gh release edit "$TAG" --draft=false --prerelease=false --latest
+          fi
+          test "$(gh release view "$TAG" --json isDraft,isPrerelease --jq '(.isDraft or .isPrerelease)')" = false
+          test "$(gh api "repos/$GH_REPO/releases/latest" --jq .tag_name)" = "$TAG"
